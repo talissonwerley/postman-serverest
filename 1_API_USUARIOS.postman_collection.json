@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "8e278f95-81e2-4b0d-a3fd-a92ba843c201",
+		"name": "1_API_USUARIOS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43984322",
+		"_collection_link": "https://talisson-8149843.postman.co/workspace/WS---ServerRest~41e9b3cd-b3dd-482f-99f9-a07511051462/collection/43984322-8e278f95-81e2-4b0d-a3fd-a92ba843c201?action=share&source=collection_link&creator=43984322"
+	},
+	"item": [
+		{
+			"name": "CRUD API Usuários",
+			"item": [
+				{
+					"name": "C - Criar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"user_id\", jsonResponse._id)\r",
+									"\r",
+									"pm.test(\"Status code is 201 Created\", function(){\r",
+									"    pm.response.to.have.status(201)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação mensagem de sucesso\", function(){\r",
+									"    pm.expect(jsonResponse.message).to.equal(\"Cadastro realizado com sucesso\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação id not null\", function() {\r",
+									"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Teste Testador da Silva\",\r\n  \"email\": \"{{login_teste}}\",\r\n  \"password\": \"{{senha_teste}}\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://serverest.dev/usuarios",
+							"protocol": "https",
+							"host": [
+								"serverest",
+								"dev"
+							],
+							"path": [
+								"usuarios"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://serverest.dev/usuarios' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "R - Buscar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = JSON.parse(responseBody);\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"console.log(jsonResponse)\r",
+									"console.log(jsonData)\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", function(){\r",
+									"    pm.response.to.have.status(200)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"E-mail and password validation\", function (){\r",
+									"    pm .expect(jsonResponse.nome).to.equal(\"Teste Testador da Silva\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação de ID de usuário\", function(){\r",
+									"    pm.expect(jsonResponse._id).to.equal(pm.environment.get(\"user_id\"))\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://serverest.dev/usuarios/{{user_id}}",
+							"protocol": "https",
+							"host": [
+								"serverest",
+								"dev"
+							],
+							"path": [
+								"usuarios",
+								"{{user_id}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://serverest.dev/usuarios/cYE6FVLtQADaFKNo' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
+					"name": "U - Atualizar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = pm.response.json();\r",
+									"console.log(jsonResponse)\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", function(){\r",
+									"    pm.response.to.have.status(200)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação de mensagem de sucesso\", function (){\r",
+									"    pm .expect(jsonResponse.message).to.equal(\"Registro alterado com sucesso\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Teste Testador Testeiro 2\",\r\n  \"email\": \"massa.testestadora2@testando.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://serverest.dev/usuarios/{{user_id}}",
+							"protocol": "https",
+							"host": [
+								"serverest",
+								"dev"
+							],
+							"path": [
+								"usuarios",
+								"{{user_id}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'https://serverest.dev/usuarios/cYE6FVLtQADaFKNo' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"nome\": \"Teste Testador da Silva\",\r\n  \"email\": \"teste@testando.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "D - Deletar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = JSON.parse(responseBody);\r",
+									"//var jsonData = pm.response.json();\r",
+									"\r",
+									"console.log(jsonResponse)\r",
+									"//console.log(jsonData)\r",
+									"\r",
+									"pm.test(\"Status code is 200 OK\", function(){\r",
+									"    pm.response.to.have.status(200)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação de ID de usuário\", function(){\r",
+									"    pm.expect(jsonResponse.message).to.equal(\"Registro excluído com sucesso\")\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://serverest.dev/usuarios/{{user_id}}",
+							"protocol": "https",
+							"host": [
+								"serverest",
+								"dev"
+							],
+							"path": [
+								"usuarios",
+								"{{user_id}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://serverest.dev/usuarios/cYE6FVLtQADaFKNo' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

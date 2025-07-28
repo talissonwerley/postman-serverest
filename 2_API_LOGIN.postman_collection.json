@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "d42495f0-fe4b-4223-8106-cff6097936c0",
+		"name": "2_API_LOGIN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43984322",
+		"_collection_link": "https://talisson-8149843.postman.co/workspace/WS---ServerRest~41e9b3cd-b3dd-482f-99f9-a07511051462/collection/43984322-d42495f0-fe4b-4223-8106-cff6097936c0?action=share&source=collection_link&creator=43984322"
+	},
+	"item": [
+		{
+			"name": "1 - Criação de Usuário",
+			"item": [
+				{
+					"name": "Criar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"user_id_login\", jsonResponse._id)\r",
+									"\r",
+									"//\r",
+									"\r",
+									"pm.test(\"Status code is 201 Created\", function(){\r",
+									"    pm.response.to.have.status(201)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação mensagem de sucesso\", function(){\r",
+									"    pm.expect(jsonResponse.message).to.equal(\"Cadastro realizado com sucesso\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação id not null\", function() {\r",
+									"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Teste Testador da Silva\",\r\n  \"email\": \"{{login_teste}}\",\r\n  \"password\": \"{{senha_teste}}\",\r\n  \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://serverest.dev/usuarios",
+							"protocol": "https",
+							"host": [
+								"serverest",
+								"dev"
+							],
+							"path": [
+								"usuarios"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://serverest.dev/usuarios' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2 - Autenticação",
+			"item": [
+				{
+					"name": "Realiza Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"auth_token\", jsonResponse.authorization);\r",
+									"\r",
+									"//\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200 Created\", function(){\r",
+									"    pm.response.to.have.status(200)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação mensagem de sucesso\", function(){\r",
+									"    pm.expect(jsonResponse.message).to.equal(\"Login realizado com sucesso\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação id not null\", function() {\r",
+									"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{login_teste}}\",\r\n  \"password\": \"{{senha_teste}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://serverest.dev/login",
+							"protocol": "https",
+							"host": [
+								"serverest",
+								"dev"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://serverest.dev/login' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"email\": \"fulano@qa.com\",\r\n  \"password\": \"teste\"\r\n\r\n}'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3 - Resetar Massa de Teste",
+			"item": [
+				{
+					"name": "Deletar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"user_id_login\", jsonResponse._id)\r",
+									"\r",
+									"pm.test(\"Status code is 200 Created\", function(){\r",
+									"    pm.response.to.have.status(200)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação mensagem de exclusão do usuario\", function(){\r",
+									"    pm.expect(jsonResponse.message).to.equal(\"Registro excluído com sucesso\")\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://serverest.dev/usuarios/{{user_id_login}}",
+							"protocol": "https",
+							"host": [
+								"serverest",
+								"dev"
+							],
+							"path": [
+								"usuarios",
+								"{{user_id_login}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://serverest.dev/usuarios/cYE6FVLtQADaFKNo' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Validação Login Excluido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonResponse = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"auth_token\", jsonResponse.authorization);\r",
+									"\r",
+									"//\r",
+									"\r",
+									"pm.test(\"Status code is 401 Created\", function(){\r",
+									"    pm.response.to.have.status(401)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação mensagem de Email e/ou senha inválidos\", function(){\r",
+									"    pm.expect(jsonResponse.message).to.equal(\"Email e/ou senha inválidos\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validação id not null\", function() {\r",
+									"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{login_teste}}\",\r\n  \"password\": \"{{senha_teste}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://serverest.dev/login",
+							"protocol": "https",
+							"host": [
+								"serverest",
+								"dev"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://serverest.dev/login' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"email\": \"fulano@qa.com\",\r\n  \"password\": \"teste\"\r\n\r\n}'"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
