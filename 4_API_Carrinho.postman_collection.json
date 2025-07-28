@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "65ad5ad0-8353-47ec-9a24-1d72335d9be9",
-		"name": "4_API_Carrinho",
+		"name": "4_API_CARRINHO",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43984322",
 		"_collection_link": "https://talisson-8149843.postman.co/workspace/WS---ServerRest~41e9b3cd-b3dd-482f-99f9-a07511051462/collection/43984322-65ad5ad0-8353-47ec-9a24-1d72335d9be9?action=share&source=collection_link&creator=43984322"
@@ -300,7 +300,7 @@
 					]
 				},
 				{
-					"name": "3 - Realização de Compra",
+					"name": "3 - Criação do Carrinho",
 					"item": [
 						{
 							"name": "1 - Cadastrar Produtos no Carrinho",
@@ -521,7 +521,848 @@
 					]
 				},
 				{
-					"name": "4 - Validações e Reset de Massa de Dados",
+					"name": "4 - Validação do Estoque",
+					"item": [
+						{
+							"name": "Buscar Produto 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonResponse = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code é 200 OK\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Resposta contém os campos principais esperados\", function () {\r",
+											"    pm.expect(jsonResponse).to.have.property(\"nome\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"preco\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"descricao\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"quantidade\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"_id\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth_token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://serverest.dev/produtos/{{id_produto1}}",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"produtos",
+										"{{id_produto1}}"
+									]
+								},
+								"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://serverest.dev/produtos/UEcWqXKz0sjWE44a' \\\r\n  -H 'accept: application/json'"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Produto 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonResponse = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code é 200 OK\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Resposta contém os campos principais esperados\", function () {\r",
+											"    pm.expect(jsonResponse).to.have.property(\"nome\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"preco\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"descricao\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"quantidade\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"_id\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth_token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://serverest.dev/produtos/{{id_produto2}}",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"produtos",
+										"{{id_produto2}}"
+									]
+								},
+								"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://serverest.dev/produtos/UEcWqXKz0sjWE44a' \\\r\n  -H 'accept: application/json'"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "5 - Resetar Massa de Dados",
+					"item": [
+						{
+							"name": "Deletar Produto 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonResponse = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code é 200 OK\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação mensagem de cadastro excluído com sucesso\", function(){\r",
+											"    pm.expect(jsonResponse.message).to.equal(\"Registro excluído com sucesso\")\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://serverest.dev/produtos/{{id_produto1}}",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"produtos",
+										"{{id_produto1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Produto 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonResponse = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code é 200 OK\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação mensagem de cadastro excluído com sucesso\", function(){\r",
+											"    pm.expect(jsonResponse.message).to.equal(\"Registro excluído com sucesso\")\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://serverest.dev/produtos/{{id_produto2}}",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"produtos",
+										"{{id_produto2}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonResponse = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"user_id_login\", jsonResponse._id)\r",
+											"\r",
+											"pm.test(\"Status code is 200 Created\", function(){\r",
+											"    pm.response.to.have.status(200)\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação mensagem de exclusão do usuario\", function(){\r",
+											"    pm.expect(jsonResponse.message).to.equal(\"Registro excluído com sucesso\")\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://serverest.dev/usuarios/{{user_id_login}}",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"usuarios",
+										"{{user_id_login}}"
+									]
+								},
+								"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://serverest.dev/usuarios/cYE6FVLtQADaFKNo' \\\r\n  -H 'accept: application/json'"
+							},
+							"response": []
+						},
+						{
+							"name": "Validação Login Excluido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonResponse = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"auth_token\", jsonResponse.authorization);\r",
+											"\r",
+											"//\r",
+											"\r",
+											"pm.test(\"Status code is 401 Created\", function(){\r",
+											"    pm.response.to.have.status(401)\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação mensagem de Email e/ou senha inválidos\", function(){\r",
+											"    pm.expect(jsonResponse.message).to.equal(\"Email e/ou senha inválidos\")\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação id not null\", function() {\r",
+											"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"{{login_teste}}\",\r\n  \"password\": \"{{senha_teste}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://serverest.dev/login",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"login"
+									]
+								},
+								"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://serverest.dev/login' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"email\": \"fulano@qa.com\",\r\n  \"password\": \"teste\"\r\n\r\n}'"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cancelar Compra",
+			"item": [
+				{
+					"name": "1 - Autencicação",
+					"item": [
+						{
+							"name": "1 - Criação de Usuário",
+							"item": [
+								{
+									"name": "Criar Usuário",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonResponse = JSON.parse(responseBody);\r",
+													"postman.setEnvironmentVariable(\"user_id_login\", jsonResponse._id)\r",
+													"\r",
+													"//\r",
+													"\r",
+													"pm.test(\"Status code is 201 Created\", function(){\r",
+													"    pm.response.to.have.status(201)\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validação mensagem de sucesso\", function(){\r",
+													"    pm.expect(jsonResponse.message).to.equal(\"Cadastro realizado com sucesso\")\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validação id not null\", function() {\r",
+													"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"nome\": \"Teste Testador da Silva\",\r\n  \"email\": \"{{login_teste}}\",\r\n  \"password\": \"{{senha_teste}}\",\r\n  \"administrador\": \"true\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://serverest.dev/usuarios",
+											"protocol": "https",
+											"host": [
+												"serverest",
+												"dev"
+											],
+											"path": [
+												"usuarios"
+											]
+										},
+										"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://serverest.dev/usuarios' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"nome\": \"Fulano da Silva\",\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}'"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "2 - Autenticação",
+							"item": [
+								{
+									"name": "Realiza Login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonResponse = JSON.parse(responseBody);\r",
+													"postman.setEnvironmentVariable(\"auth_token\", jsonResponse.authorization);\r",
+													"\r",
+													"//\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200 Created\", function(){\r",
+													"    pm.response.to.have.status(200)\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validação mensagem de sucesso\", function(){\r",
+													"    pm.expect(jsonResponse.message).to.equal(\"Login realizado com sucesso\")\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validação id not null\", function() {\r",
+													"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"{{login_teste}}\",\r\n  \"password\": \"{{senha_teste}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://serverest.dev/login",
+											"protocol": "https",
+											"host": [
+												"serverest",
+												"dev"
+											],
+											"path": [
+												"login"
+											]
+										},
+										"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://serverest.dev/login' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"email\": \"fulano@qa.com\",\r\n  \"password\": \"teste\"\r\n\r\n}'"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "2 - Criação de Produtos",
+					"item": [
+						{
+							"name": "C - Criar Produto 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonResponse = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"id_produto1\", jsonResponse._id)\r",
+											"\r",
+											"//\r",
+											"\r",
+											"pm.test(\"Status code is 201 Created\", function(){\r",
+											"    pm.response.to.have.status(201)\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação mensagem de cadastro realizado com sucesso\", function(){\r",
+											"    pm.expect(jsonResponse.message).to.equal(\"Cadastro realizado com sucesso\")\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação id not null\", function() {\r",
+											"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Fender Stratocaster Deluxe\",\r\n  \"preco\": 5000,\r\n  \"descricao\": \"GUITARRA\",\r\n  \"quantidade\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://serverest.dev/produtos",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"produtos"
+									]
+								},
+								"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://serverest.dev/produtos' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNTg5NzU4NzQ2LCJleHAiOjE1ODk3Njg3NDZ9.B6TASHV8k9xBerz4NSeFBlAZGSDhZlqESt767M0567I' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"nome\": \"Logitech MX Vertical\",\r\n  \"preco\": 470,\r\n  \"descricao\": \"Mouse\",\r\n  \"quantidade\": 381\r\n}'"
+							},
+							"response": []
+						},
+						{
+							"name": "C - Criar Produto 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonResponse = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"id_produto2\", jsonResponse._id)\r",
+											"\r",
+											"//\r",
+											"\r",
+											"pm.test(\"Status code is 201 Created\", function(){\r",
+											"    pm.response.to.have.status(201)\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação mensagem de cadastro realizado com sucesso\", function(){\r",
+											"    pm.expect(jsonResponse.message).to.equal(\"Cadastro realizado com sucesso\")\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação id not null\", function() {\r",
+											"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Gibson Les Paul Sumbust\",\r\n  \"preco\": 6000,\r\n  \"descricao\": \"GUITARRA\",\r\n  \"quantidade\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://serverest.dev/produtos",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"produtos"
+									]
+								},
+								"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://serverest.dev/produtos' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNTg5NzU4NzQ2LCJleHAiOjE1ODk3Njg3NDZ9.B6TASHV8k9xBerz4NSeFBlAZGSDhZlqESt767M0567I' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"nome\": \"Logitech MX Vertical\",\r\n  \"preco\": 470,\r\n  \"descricao\": \"Mouse\",\r\n  \"quantidade\": 381\r\n}'"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "3 - Criação do Carrinho",
+					"item": [
+						{
+							"name": "1 - Cadastrar Produtos no Carrinho",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonResponse = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable(\"id_carrinho\", jsonResponse._id)\r",
+											"\r",
+											"pm.test(\"Status code is 201 Created\", function(){\r",
+											"    pm.response.to.have.status(201)\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação mensagem de cadastro realizado com sucesso\", function(){\r",
+											"    pm.expect(jsonResponse.message).to.equal(\"Cadastro realizado com sucesso\")\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validação id not null\", function() {\r",
+											"    pm.expect(jsonResponse.message).to.not.equal(undefined)\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{id_produto1}}\",\r\n      \"quantidade\": 1\r\n    },\r\n    {\r\n      \"idProduto\": \"{{id_produto2}}\",\r\n      \"quantidade\": 1\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://serverest.dev/carrinhos",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"carrinhos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 - Buscar Carrinho",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Faz o parse da resposta JSON\r",
+											"let jsonResponse = pm.response.json();\r",
+											"\r",
+											"// \r",
+											"pm.environment.set(\"id_carrinho\", jsonResponse._id);\r",
+											"\r",
+											"pm.test(\"Status code é 200 Created\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Resposta contém os campos principais esperados\", function () {\r",
+											"    pm.expect(jsonResponse).to.have.property(\"_id\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"idUsuario\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"produtos\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"precoTotal\");\r",
+											"    pm.expect(jsonResponse).to.have.property(\"quantidadeTotal\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cada produto no carrinho possui os campos esperados\", function () {\r",
+											"    pm.expect(jsonResponse.produtos).to.be.an(\"array\").that.is.not.empty;\r",
+											"\r",
+											"    jsonResponse.produtos.forEach((produto, index) => {\r",
+											"        pm.expect(produto).to.have.property(\"idProduto\");\r",
+											"        pm.expect(produto).to.have.property(\"quantidade\");\r",
+											"        pm.expect(produto).to.have.property(\"precoUnitario\");\r",
+											"        })\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://serverest.dev/carrinhos/{{id_carrinho}}",
+									"protocol": "https",
+									"host": [
+										"serverest",
+										"dev"
+									],
+									"path": [
+										"carrinhos",
+										"{{id_carrinho}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4 - Validação do Estoque",
 					"item": [
 						{
 							"name": "Buscar Produto 1",
