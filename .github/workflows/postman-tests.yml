@@ -24,9 +24,16 @@ jobs:
           npm install -g newman
           npm install -g newman-reporter-html
 
-      - name: 🧪 Rodar coleção com Newman
+      - name: 1_API_USUARIOS
         run: |
           newman run "1_API_USUARIOS.postman_collection.json" \
+            -e "ServeRest Env.postman_environment.json" \
+            --reporters cli,html \
+            --reporter-html-export newman-report.html
+
+      - name: 2_API_LOGIN
+        run: |
+          newman run "2_API_LOGIN.postman_collection.json" \
             -e "ServeRest Env.postman_environment.json" \
             --reporters cli,html \
             --reporter-html-export newman-report.html
