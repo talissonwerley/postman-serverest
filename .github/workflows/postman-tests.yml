@@ -11,15 +11,15 @@ jobs:
     runs-on: ubuntu-24.04 # <- CORRIGIDO
 
     steps:
-      - name: 📥 Checkout do código
+      - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: 🛠️ Instalar Node.js
+      - name: Instalar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: 📦 Instalar Newman
+      - name: Instalar Newman
         run: |
           npm install -g newman
           npm install -g newman-reporter-html
@@ -41,6 +41,13 @@ jobs:
       - name: 3 - API DE PRODUTOS
         run: |
           newman run "3_API_PRODUTOS.postman_collection.json" \
+            -e "ServeRest Env.postman_environment.json" \
+            --reporters cli,html \
+            --reporter-html-export newman-report.html
+
+      - name: 4 - API DE CARRINHO
+        run: |
+          newman run "4_API_Carrinho.postman_collection.json" \
             -e "ServeRest Env.postman_environment.json" \
             --reporters cli,html \
             --reporter-html-export newman-report.html
