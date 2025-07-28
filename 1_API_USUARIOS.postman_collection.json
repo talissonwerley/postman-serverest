@@ -187,7 +187,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"Teste Testador Testeiro 2\",\r\n  \"email\": \"massa.testestadora2@testando.com.br\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
+							"raw": "{\r\n  \"nome\": \"Teste Testador Testeiro 2\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"password\": \"teste\",\r\n  \"administrador\": \"true\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
