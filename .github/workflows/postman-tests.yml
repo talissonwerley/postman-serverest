@@ -1,4 +1,4 @@
-name: Postman ServRest API Tests
+name: 🧪 Postman API Tests - ServeRest
 
 on:
   push:
@@ -7,26 +7,30 @@ on:
     branches: [testes]
 
 jobs:
-  run-postman-tests:
+  run-newman-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📦 Instalar o Node.js
-        uses: actions/setup-node@v4
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v3
+
+      - name: 🛠️ Instalar Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '20'
 
       - name: 📦 Instalar Newman
         run: npm install -g newman
 
-      - name: 🚀 Executar coleção do Postman
+      - name: 🧪 Rodar coleção com Newman
         run: |
-          newman run "1_API_USUARIOS.postman_collection.json" -e "ServerRest Env.postman_environment.json"
-          --reporters cli,json,html \
-          --reporter-html-export results/report.html
+          newman run "1_API_USUARIOS.postman_collection.json" \
+            -e "ServerRest Env.postman_environment.json" \
+            --reporters cli,html \
+            --reporter-html-export newman-report.html
 
-      - name: 💾 Salvar relatório como artefato
-        uses: actions/upload-artifact@v4
+      - name: 📤 Publicar relatório do Newman
+        uses: actions/upload-artifact@v3
         with:
-          name: postman-report
-          path: results/report.html
+          name: newman-report
+          path: newman-report.html
