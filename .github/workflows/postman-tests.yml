@@ -8,59 +8,67 @@ on:
 
 jobs:
   run-newman-tests:
-    runs-on: ubuntu-24.04 # <- CORRIGIDO
+    runs-on: ubuntu-24.04
 
     steps:
-      - name: Checkout do código
+      - name: 📥 Checkout do código
         uses: actions/checkout@v3
 
-      - name: Instalar Node.js
+      - name: 📦 Instalar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Instalar Newman
+      - name: 📦 Instalar Newman + HTMLExtra
         run: |
           npm install -g newman
-          npm install -g newman-reporter-html
+          npm install -g newman-reporter-htmlextra
+
+      - name: 📁 Criar pasta de relatórios
+        run: mkdir -p newman
 
       - name: 1 - API DE USUARIOS
         run: |
           newman run "1_API_USUARIOS.postman_collection.json" \
             -e "ServeRest Env.postman_environment.json" \
-            --reporters cli,html \
-            --reporter-html-export newman-report.html
+            -r cli,htmlextra \
+            --reporter-htmlextra-export newman/1_API_USUARIOS.html \
+            --reporter-htmlextra-title "API de Usuários - ServeRest"
 
       - name: 2 - API DE LOGIN
         run: |
           newman run "2_API_LOGIN.postman_collection.json" \
             -e "ServeRest Env.postman_environment.json" \
-            --reporters cli,html \
-            --reporter-html-export newman-report.html
+            -r cli,htmlextra \
+            --reporter-htmlextra-export newman/2_API_LOGIN.html \
+            --reporter-htmlextra-title "API de Login - ServeRest"
 
       - name: 3 - API DE PRODUTOS
         run: |
           newman run "3_API_PRODUTOS.postman_collection.json" \
             -e "ServeRest Env.postman_environment.json" \
-            --reporters cli,html \
-            --reporter-html-export newman-report.html
+            -r cli,htmlextra \
+            --reporter-htmlextra-export newman/3_API_PRODUTOS.html \
+            --reporter-htmlextra-title "API de Produtos - ServeRest"
 
       - name: 4 - API DE CARRINHO
         run: |
           newman run "4_API_Carrinho.postman_collection.json" \
             -e "ServeRest Env.postman_environment.json" \
-            --reporters cli,html \
-            --reporter-html-export newman-report.html
+            -r cli,htmlextra \
+            --reporter-htmlextra-export newman/4_API_CARRINHO.html \
+            --reporter-htmlextra-title "API de Carrinho - ServeRest"
 
       - name: LISTAR
         run: |
           newman run "LISTAR.postman_collection.json" \
             -e "ServeRest Env.postman_environment.json" \
-            --reporters cli,html \
-            --reporter-html-export newman-report.html
+            -r cli,htmlextra \
+            --reporter-htmlextra-export newman/LISTAR.html \
+            --reporter-htmlextra-title "Listar Recursos - ServeRest"
 
-      - name: 📤 Publicar relatório do Newman
+      - name: 📤 Publicar relatórios do Newman
         uses: actions/upload-artifact@v4
         with:
-          name: newman-report
-          path: newman-report.html
+          name: newman-html-reports
+          path: newman/

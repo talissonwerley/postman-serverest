@@ -1,0 +1,24 @@
+{
+  "name": "serverest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test:api": "mkdir newman && newman run \"1_API_USUARIOS.postman_collection.json\" -e \"ServeRest Env.postman_environment.json\" --reporters cli,htmlextra --reporter-htmlextra-export newman/1_API_USUARIOS.html --reporter-htmlextra-title \"API de Usuários - ServeRest\" && newman run \"2_API_LOGIN.postman_collection.json\" -e \"ServeRest Env.postman_environment.json\" --reporters cli,htmlextra --reporter-htmlextra-export newman/2_API_LOGIN.html --reporter-htmlextra-title \"API de Login - ServeRest\" && newman run \"3_API_PRODUTOS.postman_collection.json\" -e \"ServeRest Env.postman_environment.json\" --reporters cli,htmlextra --reporter-htmlextra-export newman/3_API_PRODUTOS.html --reporter-htmlextra-title \"API de Produtos - ServeRest\" && newman run \"4_API_Carrinho.postman_collection.json\" -e \"ServeRest Env.postman_environment.json\" --reporters cli,htmlextra --reporter-htmlextra-export newman/4_API_CARRINHO.html --reporter-htmlextra-title \"API de Carrinho - ServeRest\" && newman run \"LISTAR.postman_collection.json\" -e \"ServeRest Env.postman_environment.json\" --reporters cli,htmlextra --reporter-htmlextra-export newman/LISTAR.html --reporter-htmlextra-title \"Listar Recursos - ServeRest\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talissonwerley/postman-serverest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/talissonwerley/postman-serverest/issues"
+  },
+  "homepage": "https://github.com/talissonwerley/postman-serverest#readme",
+  "description": "",
+  "devDependencies": {
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
+  }
+}
